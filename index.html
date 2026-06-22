@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🚐 NZ Campervan Trip Planner</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button id="sidebarToggle" aria-label="Toggle menu">☰</button>
+<aside id="sidebar">
+  <h1>🚐 NZ Trip Planner</h1>
+  <div id="status">Loading…</div>
+
+  <section>
+    <label>Google Sheet CSV URL</label>
+    <input id="sheetUrl" placeholder="Paste your published CSV URL">
+    <button id="loadBtn">⟳ Load / Refresh</button>
+  </section>
+
+  <section>
+    <label>Filter by day</label>
+    <select id="dayFilter"><option value="all">All days</option></select>
+  </section>
+
+  <section>
+    <details open>
+      <summary>🗺️ Campervan layers</summary>
+      <label><input type="checkbox" data-layer="docCampsite" checked> DOC campsites (offline)</label>
+      <label><input type="checkbox" data-layer="campsite"> Other campsites (live, OSM)</label>
+      <label><input type="checkbox" data-layer="caravan"> Holiday parks (live, OSM)</label>
+      <label><input type="checkbox" data-layer="dump"> Dump stations (live, OSM)</label>
+      <label><input type="checkbox" data-layer="water"> Drinking water (live, OSM)</label>
+      <label><input type="checkbox" data-layer="fuel"> Fuel (live, OSM)</label>
+    </details>
+  </section>
+
+  <section>
+    <button id="optimizeBtn">⚡ Check route order</button>
+    <div id="optimizeReport"></div>
+  </section>
+
+  <section id="dayList"></section>
+</aside>
+<main id="map"></main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="config.js"></script>
+<script src="parser.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

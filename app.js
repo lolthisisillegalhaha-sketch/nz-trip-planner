@@ -1,0 +1,313 @@
+const cfg = window.APP_CONFIG || {};
+const MAX_SPEED_KMH = 60;
+const setStatus = m => document.getElementById('status').textContent = m;
+
+// --- Map setup (OpenStreetMap tiles, no API key) ---
+const map = L.map('map').setView([-43.5, 171.5], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+let days = [];          // parsed itinerary
+let stopMarkers = [];   // current map markers
+let routeLines = [];
+let poiLayers = {};
+let docCampsites = null; // cached static DOC GeoJSON
+
+// --- Category styling ---
+const CAT_STYLE = {
+  stay:     { color: '#2a7', icon: '🏕️' },
+  fuel:     { color: '#c30', icon: '⛽' },
+  flight:   { color: '#06c', icon: '✈️' },
+  food:     { color: '#e90', icon: '🍴' },
+  shop:     { color: '#73c', icon: '🛒' },
+  waste:    { color: '#876', icon: '💩' },
+  wildlife: { color: '#0a8', icon: '🦭' },
+  water:    { color: '#08c', icon: '⛵' },
+  walk:     { color: '#4363d8', icon: '🥾' },
+  activity: { color: '#4363d8', icon: '📍' }
+};
+function styleFor(category) { return CAT_STYLE[category] || CAT_STYLE.activity; }
+
+// --- Coordinates: read from a pre-baked static file (data/coords.json) ---
+// Geocoding happens OFFLINE via scripts/geocode-itinerary.js, run once per
+// itinerary edit on your own machine. The deployed site makes no live
+// geocoding calls — this keeps things fast, reliable with patchy signal,
+// and respectful of Nominatim's free-tier usage policy (it isn't designed
+// for apps to hit it on every page load).
+let coordsCache = null;
+async function loadCoords() {
+  if (coordsCache) return coordsCache;
+  try {
+    const res = await fetch('data/coords.json');
+    coordsCache = res.ok ? await res.json() : {};
+  } catch (e) {
+    coordsCache = {};
+  }
+  return coordsCache;
+}
+
+// --- Load sheet ---
+async function loadSheet() {
+  const url = document.getElementById('sheetUrl').value || cfg.DEFAULT_SHEET_CSV;
+  if (!url) { setStatus('⚠️ Provide a published Google Sheet CSV URL'); return; }
+  setStatus('Fetching sheet…');
+  let csv;
+  try {
+    csv = await (await fetch(url)).text();
+  } catch (e) {
+    setStatus('❌ Could not fetch sheet — check the URL and your connection');
+    return;
+  }
+  days = window.ItineraryParser.parseCsv(csv);
+  const totalStops = days.reduce((s, d) => s + d.stops.length, 0);
+  setStatus(`Parsed ${days.length} days, ${totalStops} stops. Matching coordinates…`);
+
+  const coords = await loadCoords();
+  for (const day of days) {
+    for (const s of day.stops) {
+      if (!s.geocodable) continue;
+      const g = coords[s.name];
+      if (g) Object.assign(s, g);
+    }
+  }
+  populateDayFilter();
+  renderSidebar();
+  renderMap();
+  const unplaced = days.reduce((s, d) => s + d.stops.filter(x => x.geocodable && !x.lat).length, 0);
+  setStatus(`✅ Loaded ${days.length} days` + (unplaced ? ` (${unplaced} new places — run scripts/geocode-itinerary.js and redeploy)` : ''));
+}
+
+function populateDayFilter() {
+  const sel = document.getElementById('dayFilter');
+  sel.innerHTML = '<option value="all">All days</option>'
+    + days.map(d => `<option value="${d.dayNum}">Day ${d.dayNum} · ${d.dayTitle}</option>`).join('');
+}
+
+function selectedDays() {
+  const v = document.getElementById('dayFilter').value;
+  return v === 'all' ? days : days.filter(d => d.dayNum === +v);
+}
+
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+// --- Sidebar render ---
+function renderSidebar() {
+  const root = document.getElementById('dayList');
+  root.innerHTML = selectedDays().map(d => `
+    <div class="day-card">
+      <strong>Day ${d.dayNum}</strong> · ${escapeHtml(d.dayTitle)}
+      ${d.stops.map(s => `
+        <div class="stop-row">
+          <span>${styleFor(s.category).icon}</span>
+          <span>${escapeHtml(s.name)}</span>
+          ${s.durationMin ? `<span class="tag">${s.durationMin}m</span>` : ''}
+          ${s.cost && !isNaN(parseFloat(s.cost)) ? `<span class="tag">$${s.cost}</span>` : ''}
+          ${s.geocodable && !s.lat ? `<span class="tag warn">no pin</span>` : ''}
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+// --- Map render ---
+function renderMap() {
+  stopMarkers.forEach(m => map.removeLayer(m)); stopMarkers = [];
+  routeLines.forEach(l => map.removeLayer(l));  routeLines = [];
+
+  const sel = selectedDays();
+  const colors = ['#e6194b', '#3cb44b', '#4363d8', '#f58231', '#911eb4', '#42d4f4', '#bfef45', '#f032e6'];
+  const bounds = [];
+
+  sel.forEach((day, di) => {
+    const color = colors[di % colors.length];
+    const pts = day.stops.filter(s => s.lat);
+    pts.forEach(s => {
+      const style = styleFor(s.category);
+      const mk = L.circleMarker([s.lat, s.lng], {
+        radius: 7, color: style.color, fillColor: '#fff', fillOpacity: 1, weight: 3
+      })
+        .bindPopup(`<b>${style.icon} ${escapeHtml(s.name)}</b><br>Day ${day.dayNum}<br>${escapeHtml(s.notes || '')}`)
+        .addTo(map);
+      stopMarkers.push(mk);
+      bounds.push([s.lat, s.lng]);
+    });
+    if (pts.length > 1) {
+      const line = L.polyline(pts.map(p => [p.lat, p.lng]),
+        { color, weight: 3, opacity: 0.6, dashArray: '6,6' }).addTo(map);
+      routeLines.push(line);
+    }
+  });
+  if (bounds.length) map.fitBounds(bounds, { padding: [40, 40] });
+}
+
+// --- OSRM driving-time matrix (free public demo server), with 60 km/h floor ---
+// Public OSRM demo server: https://router.project-osrm.org — fine for personal,
+// occasional use; not for high-volume or commercial traffic.
+async function osrmMatrix(points) {
+  const coords = points.map(p => `${p.lng},${p.lat}`).join(';');
+  const url = `https://router.project-osrm.org/table/v1/driving/${coords}?annotations=distance,duration`;
+  const res = await fetch(url);
+  const j = await res.json();
+  const n = points.length;
+  const distKm = Array.from({ length: n }, () => Array(n).fill(0));
+  const durMin = Array.from({ length: n }, () => Array(n).fill(0));
+  for (let i = 0; i < n; i++) for (let k = 0; k < n; k++) if (i !== k) {
+    const dKm = (j.distances?.[i]?.[k] || 0) / 1000;
+    const tMin = (j.durations?.[i]?.[k] || 0) / 60;
+    distKm[i][k] = dKm;
+    durMin[i][k] = Math.max(tMin, dKm / MAX_SPEED_KMH * 60);
+  }
+  return { distKm, durMin };
+}
+
+function totalTime(order, mat) {
+  let t = 0;
+  for (let i = 0; i < order.length - 1; i++) t += mat[order[i]][order[i + 1]];
+  return t;
+}
+
+function nearestNeighbor(m) {
+  const n = m.length, mid = [...Array(n - 2).keys()].map(i => i + 1), order = [0];
+  let curr = 0;
+  while (mid.length) {
+    mid.sort((a, b) => m[curr][a] - m[curr][b]);
+    const next = mid.shift(); order.push(next); curr = next;
+  }
+  order.push(n - 1); return order;
+}
+
+function twoOpt(order, m) {
+  let improved = true;
+  while (improved) {
+    improved = false;
+    for (let i = 1; i < order.length - 2; i++) for (let k = i + 1; k < order.length - 1; k++) {
+      const d1 = m[order[i - 1]][order[i]] + m[order[k]][order[k + 1]];
+      const d2 = m[order[i - 1]][order[k]] + m[order[i]][order[k + 1]];
+      if (d2 + 1e-9 < d1) {
+        order = order.slice(0, i).concat(order.slice(i, k + 1).reverse(), order.slice(k + 1));
+        improved = true;
+      }
+    }
+  }
+  return order;
+}
+
+// --- Optimizer / sanity check ---
+async function doubleCheck() {
+  const report = document.getElementById('optimizeReport');
+  report.innerHTML = '';
+  setStatus('Checking route order against OSRM (60 km/h floor applied)…');
+  for (const day of selectedDays()) {
+    const pts = day.stops.filter(s => s.lat);
+    if (pts.length < 3) continue;
+    let mat;
+    try {
+      mat = await osrmMatrix(pts);
+    } catch (e) {
+      report.innerHTML += `<div class="day-card"><strong>Day ${day.dayNum}</strong><div class="warn">⚠️ Routing service unavailable — try again later</div></div>`;
+      continue;
+    }
+    const { durMin, distKm } = mat;
+    const planned = pts.map((_, i) => i);
+    const optimized = twoOpt(nearestNeighbor(durMin), durMin);
+    const tPlan = totalTime(planned, durMin);
+    const tOpt = totalTime(optimized, durMin);
+    const dPlan = totalTime(planned, distKm);
+    const dOpt = totalTime(optimized, distKm);
+    const delta = tPlan - tOpt;
+    const same = optimized.every((v, i) => v === planned[i]);
+    const cls = delta > 5 ? 'delta-bad' : 'delta-good';
+    report.innerHTML += `
+      <div class="day-card">
+        <strong>Day ${day.dayNum}</strong>
+        <div>Your order: ${dPlan.toFixed(0)} km · ${(tPlan / 60).toFixed(1)} h drive</div>
+        <div>Optimal: ${dOpt.toFixed(0)} km · ${(tOpt / 60).toFixed(1)} h drive</div>
+        <div class="${cls}">${same ? '✅ Already optimal' :
+        `⚠️ Could save ~${delta.toFixed(0)} min by reordering:<br>${optimized.map(i => escapeHtml(pts[i].name)).join(' → ')}`}</div>
+      </div>`;
+  }
+  setStatus('✅ Route check complete');
+}
+
+// --- Static DOC campsite layer (baked-in GeoJSON, works without live signal) ---
+async function loadDocCampsites() {
+  if (poiLayers.docCampsite) { map.removeLayer(poiLayers.docCampsite); delete poiLayers.docCampsite; return; }
+  if (!docCampsites) {
+    try {
+      const res = await fetch('data/doc-campsites.geojson');
+      if (!res.ok) throw new Error('not found');
+      docCampsites = await res.json();
+    } catch (e) {
+      setStatus('⚠️ data/doc-campsites.geojson not found — see README to add DOC campsite data');
+      document.querySelector('input[data-layer="docCampsite"]').checked = false;
+      return;
+    }
+  }
+  const layer = L.geoJSON(docCampsites, {
+    pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
+      radius: 6, color: '#2a7', fillColor: '#fff', fillOpacity: 1, weight: 3
+    }),
+    onEachFeature: (feature, layer) => {
+      const p = feature.properties || {};
+      const name = p.name || p.Name || p.NAME || 'DOC Campsite';
+      layer.bindPopup(`<b>⛺ ${escapeHtml(name)}</b>`);
+    }
+  });
+  layer.addTo(map);
+  poiLayers.docCampsite = layer;
+}
+
+// --- Live OSM Overpass layers (campsites/holiday parks/dump/water/fuel) ---
+const LAYER_Q = {
+  campsite: '["tourism"="camp_site"]', caravan: '["tourism"="caravan_site"]',
+  dump: '["amenity"="sanitary_dump_station"]', water: '["amenity"="drinking_water"]', fuel: '["amenity"="fuel"]'
+};
+const LAYER_STYLE = {
+  campsite: { color: '#2a7', icon: '⛺' }, caravan: { color: '#27a', icon: '🏕️' },
+  dump: { color: '#a72', icon: '🚽' }, water: { color: '#08c', icon: '💧' }, fuel: { color: '#c30', icon: '⛽' }
+};
+async function loadLayer(key) {
+  if (poiLayers[key]) { map.removeLayer(poiLayers[key]); delete poiLayers[key]; }
+  const b = map.getBounds();
+  const bbox = `${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`;
+  const q = `[out:json][timeout:25];(node${LAYER_Q[key]}(${bbox});way${LAYER_Q[key]}(${bbox}););out center 250;`;
+  try {
+    const r = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', body: q });
+    const j = await r.json();
+    const layer = L.layerGroup();
+    j.elements.forEach(el => {
+      const lat = el.lat ?? el.center?.lat, lng = el.lon ?? el.center?.lon;
+      if (lat == null) return;
+      L.circleMarker([lat, lng], { radius: 5, color: LAYER_STYLE[key].color, fillOpacity: 0.7 })
+        .bindPopup(`<b>${LAYER_STYLE[key].icon} ${escapeHtml(el.tags?.name || key)}</b><br>${Object.entries(el.tags || {}).slice(0, 6).map(([k, v]) => `${escapeHtml(k)}: ${escapeHtml(v)}`).join('<br>')}`)
+        .addTo(layer);
+    });
+    layer.addTo(map);
+    poiLayers[key] = layer;
+  } catch (e) {
+    setStatus(`⚠️ Could not load ${key} layer — check your connection`);
+    document.querySelector(`input[data-layer="${key}"]`).checked = false;
+  }
+}
+
+// --- Wiring ---
+document.getElementById('loadBtn').onclick = loadSheet;
+document.getElementById('optimizeBtn').onclick = doubleCheck;
+document.getElementById('dayFilter').onchange = () => { renderSidebar(); renderMap(); };
+document.getElementById('sidebarToggle').onclick = () => document.getElementById('sidebar').classList.toggle('open');
+document.querySelectorAll('input[data-layer]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const key = cb.dataset.layer;
+    if (key === 'docCampsite') { loadDocCampsites(); return; }
+    if (cb.checked) loadLayer(key);
+    else if (poiLayers[key]) { map.removeLayer(poiLayers[key]); delete poiLayers[key]; }
+  });
+});
+
+// --- Init ---
+if (cfg.DEFAULT_SHEET_CSV) document.getElementById('sheetUrl').value = cfg.DEFAULT_SHEET_CSV;
+loadDocCampsites(); // load by default since checkbox starts checked
+if (cfg.DEFAULT_SHEET_CSV) loadSheet();
+else setStatus('Paste your published Google Sheet CSV URL above and click Load');

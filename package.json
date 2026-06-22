@@ -1,0 +1,10 @@
+{
+  "name": "nz-trip-planner",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Free, keyless NZ campervan trip planner: pulls itinerary from a published Google Sheet, overlays DOC campsites + OSM fuel/dump/water layers, and checks route order against a 60 km/h drive-time floor.",
+  "scripts": {
+    "build": "node build.js",
+    "convert-doc-csv": "node scripts/csv-to-geojson.js"
+  }
+}
