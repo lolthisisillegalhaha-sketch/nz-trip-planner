@@ -1,1 +1,782 @@
-{}
+{
+  "trip_name": "NZ South Island Itinerary - Nov 2026",
+  "total_places": 97,
+  "places": [
+    {
+      "day": 1,
+      "date": "Sun 1 Nov",
+      "activity_type": "Flight Arrival",
+      "name": "Christchurch International Airport",
+      "latitude": -43.4894,
+      "longitude": 172.532
+    },
+    {
+      "day": 1,
+      "date": "Sun 1 Nov",
+      "activity_type": "Stay",
+      "name": "LyLo Christchurch",
+      "latitude": -43.5333,
+      "longitude": 172.6333
+    },
+    {
+      "day": 2,
+      "date": "Mon 2 Nov",
+      "activity_type": "Campervan Pickup",
+      "name": "Elements RV World",
+      "latitude": -43.545,
+      "longitude": 172.526
+    },
+    {
+      "day": 2,
+      "date": "Mon 2 Nov",
+      "activity_type": "Supplies",
+      "name": "Pak'nSave Hornby",
+      "latitude": -43.544,
+      "longitude": 172.529
+    },
+    {
+      "day": 2,
+      "date": "Mon 2 Nov",
+      "activity_type": "Wildlife",
+      "name": "Ohau Point Seal Colony",
+      "latitude": -42.25,
+      "longitude": 173.8333
+    },
+    {
+      "day": 2,
+      "date": "Mon 2 Nov",
+      "activity_type": "Walk",
+      "name": "Kaikōura Peninsula Walkway",
+      "latitude": -42.428,
+      "longitude": 173.706
+    },
+    {
+      "day": 2,
+      "date": "Mon 2 Nov",
+      "activity_type": "Food",
+      "name": "Kaikōura Crayfish Stalls (Nin's Bin)",
+      "latitude": -42.2333,
+      "longitude": 173.8167
+    },
+    {
+      "day": 2,
+      "date": "Mon 2 Nov",
+      "activity_type": "Stay (Option A)",
+      "name": "Scarborough St Reserve, Kaikōura",
+      "latitude": -42.41,
+      "longitude": 173.69
+    },
+    {
+      "day": 2,
+      "date": "Mon 2 Nov",
+      "activity_type": "Stay (Option B)",
+      "name": "Jimmy Armers Beach Car Park",
+      "latitude": -42.415,
+      "longitude": 173.685
+    },
+    {
+      "day": 3,
+      "date": "Tue 3 Nov",
+      "activity_type": "Wildlife",
+      "name": "Dolphin Encounter Kaikōura",
+      "latitude": -42.406,
+      "longitude": 173.681
+    },
+    {
+      "day": 3,
+      "date": "Tue 3 Nov",
+      "activity_type": "Waste Dump",
+      "name": "Kaikōura South Bay Domain",
+      "latitude": -42.425,
+      "longitude": 173.692
+    },
+    {
+      "day": 3,
+      "date": "Tue 3 Nov",
+      "activity_type": "Hike (Optional)",
+      "name": "Mt Fyffe Hut Track",
+      "latitude": -42.35,
+      "longitude": 173.6167
+    },
+    {
+      "day": 3,
+      "date": "Tue 3 Nov",
+      "activity_type": "Stay",
+      "name": "Porters Lodge & RV Park",
+      "latitude": -42.35,
+      "longitude": 173.69
+    },
+    {
+      "day": 4,
+      "date": "Wed 4 Nov",
+      "activity_type": "Sightseeing",
+      "name": "Castle Hill / Kura Tawhiti",
+      "latitude": -43.208,
+      "longitude": 171.715
+    },
+    {
+      "day": 4,
+      "date": "Wed 4 Nov",
+      "activity_type": "Adventure",
+      "name": "Cave Stream Scenic Reserve",
+      "latitude": -43.2167,
+      "longitude": 171.75
+    },
+    {
+      "day": 4,
+      "date": "Wed 4 Nov",
+      "activity_type": "Explore",
+      "name": "Arthur's Pass Village",
+      "latitude": -42.945,
+      "longitude": 171.565
+    },
+    {
+      "day": 4,
+      "date": "Wed 4 Nov",
+      "activity_type": "Walk",
+      "name": "Devil's Punchbowl Waterfall",
+      "latitude": -42.9333,
+      "longitude": 171.5667
+    },
+    {
+      "day": 4,
+      "date": "Wed 4 Nov",
+      "activity_type": "Viewpoint",
+      "name": "Otira Gorge Lookout",
+      "latitude": -42.85,
+      "longitude": 171.55
+    },
+    {
+      "day": 4,
+      "date": "Wed 4 Nov",
+      "activity_type": "Stay",
+      "name": "Iveagh Bay Campsite, Moana",
+      "latitude": -42.6167,
+      "longitude": 171.4833
+    },
+    {
+      "day": 5,
+      "date": "Thu 5 Nov",
+      "activity_type": "Walk",
+      "name": "Pancake Rocks & Blowholes, Punakaiki",
+      "latitude": -42.1153,
+      "longitude": 171.3267
+    },
+    {
+      "day": 5,
+      "date": "Thu 5 Nov",
+      "activity_type": "Walk (Optional)",
+      "name": "Hokitika Gorge",
+      "latitude": -42.95,
+      "longitude": 171.0167
+    },
+    {
+      "day": 5,
+      "date": "Thu 5 Nov",
+      "activity_type": "Wildlife",
+      "name": "Glowworm Dell, Hokitika",
+      "latitude": -42.724,
+      "longitude": 170.974
+    },
+    {
+      "day": 5,
+      "date": "Thu 5 Nov",
+      "activity_type": "Stay",
+      "name": "Shining Star Beachfront Accommodation",
+      "latitude": -42.71,
+      "longitude": 170.965
+    },
+    {
+      "day": 6,
+      "date": "Fri 6 Nov",
+      "activity_type": "Walk",
+      "name": "Lake Ianthe (Matahi Campsite & Boat Ramp)",
+      "latitude": -43.0167,
+      "longitude": 170.6167
+    },
+    {
+      "day": 6,
+      "date": "Fri 6 Nov",
+      "activity_type": "Walk",
+      "name": "Franz Josef Glacier (Terrace Walk)",
+      "latitude": -43.438,
+      "longitude": 170.183
+    },
+    {
+      "day": 6,
+      "date": "Fri 6 Nov",
+      "activity_type": "Walk (Alt)",
+      "name": "Franz Josef Glacier Car Park",
+      "latitude": -43.438,
+      "longitude": 170.183
+    },
+    {
+      "day": 6,
+      "date": "Fri 6 Nov",
+      "activity_type": "Walk (Optional)",
+      "name": "Sentinel Rock Walk",
+      "latitude": -43.44,
+      "longitude": 170.18
+    },
+    {
+      "day": 6,
+      "date": "Fri 6 Nov",
+      "activity_type": "Stay",
+      "name": "Rainforest Retreat Holiday Park (Orange Sheep)",
+      "latitude": -43.387,
+      "longitude": 170.184
+    },
+    {
+      "day": 7,
+      "date": "Sat 7 Nov",
+      "activity_type": "Walk",
+      "name": "Fox Glacier South Side Walk",
+      "latitude": -43.467,
+      "longitude": 170.017
+    },
+    {
+      "day": 7,
+      "date": "Sat 7 Nov",
+      "activity_type": "Supplies",
+      "name": "On The Spot Fox Glacier",
+      "latitude": -43.464,
+      "longitude": 169.958
+    },
+    {
+      "day": 7,
+      "date": "Sat 7 Nov",
+      "activity_type": "Walk",
+      "name": "Lake Matheson Reflection Island Loop",
+      "latitude": -43.45,
+      "longitude": 169.95
+    },
+    {
+      "day": 7,
+      "date": "Sat 7 Nov",
+      "activity_type": "Stay",
+      "name": "Gillespies Beach Campsite (DOC)",
+      "latitude": -43.4,
+      "longitude": 169.8167
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Viewpoint",
+      "name": "Knights Point Lookout",
+      "latitude": -43.7167,
+      "longitude": 169.2167
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Walk",
+      "name": "Ship Creek Dune Lake & Kahikatea Swamp Walks",
+      "latitude": -43.75,
+      "longitude": 169.1167
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Walk",
+      "name": "Roaring Billy Falls",
+      "latitude": -43.9167,
+      "longitude": 169.3167
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Viewpoint",
+      "name": "Gates of Haast Bridge",
+      "latitude": -44.0167,
+      "longitude": 169.3167
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Walk",
+      "name": "Thunder Creek Falls",
+      "latitude": -44.05,
+      "longitude": 169.35
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Walk",
+      "name": "Blue Pools Track, Makarora",
+      "latitude": -44.1167,
+      "longitude": 169.3
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Walk",
+      "name": "Wilson Creek Chasm",
+      "latitude": -44.0667,
+      "longitude": 169.2833
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Stay (Option A)",
+      "name": "Red Bridge Freedom Camp, Albert Town",
+      "latitude": -44.6833,
+      "longitude": 169.1833
+    },
+    {
+      "day": 8,
+      "date": "Sun 8 Nov",
+      "activity_type": "Stay (Option B)",
+      "name": "Albert Town Campground (DOC)",
+      "latitude": -44.6833,
+      "longitude": 169.1833
+    },
+    {
+      "day": 9,
+      "date": "Mon 9 Nov",
+      "activity_type": "Activity",
+      "name": "Skydive Wanaka",
+      "latitude": -44.722,
+      "longitude": 169.246
+    },
+    {
+      "day": 9,
+      "date": "Mon 9 Nov",
+      "activity_type": "Hike",
+      "name": "Raspberry Flat Carpark (Rob Roy Glacier Track)",
+      "latitude": -44.5333,
+      "longitude": 168.7333
+    },
+    {
+      "day": 9,
+      "date": "Mon 9 Nov",
+      "activity_type": "Supplies",
+      "name": "New World Wānaka",
+      "latitude": -44.7,
+      "longitude": 169.15
+    },
+    {
+      "day": 9,
+      "date": "Mon 9 Nov",
+      "activity_type": "Stay",
+      "name": "Mt Aspiring Holiday Park, Wānaka",
+      "latitude": -44.7,
+      "longitude": 169.13
+    },
+    {
+      "day": 10,
+      "date": "Tue 10 Nov",
+      "activity_type": "Activity",
+      "name": "Lake Wānaka foreshore (Paddle Wanaka)",
+      "latitude": -44.692,
+      "longitude": 169.133
+    },
+    {
+      "day": 10,
+      "date": "Tue 10 Nov",
+      "activity_type": "Walk",
+      "name": "Bannockburn Sluicings Historic Reserve",
+      "latitude": -45.05,
+      "longitude": 169.1833
+    },
+    {
+      "day": 10,
+      "date": "Tue 10 Nov",
+      "activity_type": "Stay",
+      "name": "Mt Aspiring Holiday Park, Wānaka",
+      "latitude": -44.7,
+      "longitude": 169.13
+    },
+    {
+      "day": 11,
+      "date": "Wed 11 Nov",
+      "activity_type": "Hike",
+      "name": "Roy's Peak Track Carpark",
+      "latitude": -44.685,
+      "longitude": 169.067
+    },
+    {
+      "day": 11,
+      "date": "Wed 11 Nov",
+      "activity_type": "Farm Visit",
+      "name": "Rose Creek Farm",
+      "latitude": -45.0167,
+      "longitude": 169.15
+    },
+    {
+      "day": 11,
+      "date": "Wed 11 Nov",
+      "activity_type": "Explore / Dinner",
+      "name": "Queenstown Waterfront (Marine Parade)",
+      "latitude": -45.0312,
+      "longitude": 168.6626
+    },
+    {
+      "day": 11,
+      "date": "Wed 11 Nov",
+      "activity_type": "Stay (Option A)",
+      "name": "Lakeview Carpark, Queenstown",
+      "latitude": -45.029,
+      "longitude": 168.658
+    },
+    {
+      "day": 11,
+      "date": "Wed 11 Nov",
+      "activity_type": "Stay (Option B)",
+      "name": "Boundary Street Freedom Camp, Queenstown",
+      "latitude": -45.03,
+      "longitude": 168.66
+    },
+    {
+      "day": 11,
+      "date": "Wed 11 Nov",
+      "activity_type": "Stay (Option C)",
+      "name": "Hampshire Holiday Park – Queenstown Lakeview",
+      "latitude": -45.025,
+      "longitude": 168.658
+    },
+    {
+      "day": 12,
+      "date": "Thu 12 Nov",
+      "activity_type": "Drive/Explore",
+      "name": "Glenorchy Village & Paradise",
+      "latitude": -44.85,
+      "longitude": 168.3833
+    },
+    {
+      "day": 12,
+      "date": "Thu 12 Nov",
+      "activity_type": "Walk",
+      "name": "Glenorchy Lagoon Boardwalk",
+      "latitude": -44.852,
+      "longitude": 168.387
+    },
+    {
+      "day": 12,
+      "date": "Thu 12 Nov",
+      "activity_type": "Cruise",
+      "name": "TSS Earnslaw – Walter Peak High Country Farm",
+      "latitude": -45.029,
+      "longitude": 168.658
+    },
+    {
+      "day": 12,
+      "date": "Thu 12 Nov",
+      "activity_type": "Stay",
+      "name": "Queenstown TOP 10 / Creeksyde",
+      "latitude": -45.033,
+      "longitude": 168.67
+    },
+    {
+      "day": 13,
+      "date": "Fri 13 Nov",
+      "activity_type": "Walk",
+      "name": "Arrowtown Chinese Settlement",
+      "latitude": -44.9333,
+      "longitude": 168.8167
+    },
+    {
+      "day": 13,
+      "date": "Fri 13 Nov",
+      "activity_type": "Food",
+      "name": "Provisions of Arrowtown / Aosta",
+      "latitude": -44.938,
+      "longitude": 168.833
+    },
+    {
+      "day": 13,
+      "date": "Fri 13 Nov",
+      "activity_type": "Viewpoint",
+      "name": "Kingston (Lake Wakatipu Southern Tip)",
+      "latitude": -45.3333,
+      "longitude": 168.7167
+    },
+    {
+      "day": 13,
+      "date": "Fri 13 Nov",
+      "activity_type": "Supplies",
+      "name": "Fresh Choice Te Anau",
+      "latitude": -45.414,
+      "longitude": 167.718
+    },
+    {
+      "day": 13,
+      "date": "Fri 13 Nov",
+      "activity_type": "Tour",
+      "name": "Te Anau Glowworm Caves (RealNZ)",
+      "latitude": -45.414,
+      "longitude": 167.718
+    },
+    {
+      "day": 13,
+      "date": "Fri 13 Nov",
+      "activity_type": "Stay (Option A)",
+      "name": "Andy's Place Te Anau",
+      "latitude": -45.41,
+      "longitude": 167.71
+    },
+    {
+      "day": 13,
+      "date": "Fri 13 Nov",
+      "activity_type": "Stay (Option B)",
+      "name": "Te Anau Lakeview Holiday Park & Motels",
+      "latitude": -45.41,
+      "longitude": 167.71
+    },
+    {
+      "day": 14,
+      "date": "Sat 14 Nov",
+      "activity_type": "Walk",
+      "name": "Mirror Lakes, Eglinton Valley",
+      "latitude": -44.95,
+      "longitude": 168.05
+    },
+    {
+      "day": 14,
+      "date": "Sat 14 Nov",
+      "activity_type": "Walk",
+      "name": "Lake Gunn Nature Walk",
+      "latitude": -44.8833,
+      "longitude": 168.0833
+    },
+    {
+      "day": 14,
+      "date": "Sat 14 Nov",
+      "activity_type": "Walk",
+      "name": "The Chasm, Fiordland",
+      "latitude": -44.7333,
+      "longitude": 167.9667
+    },
+    {
+      "day": 14,
+      "date": "Sat 14 Nov",
+      "activity_type": "Wildlife",
+      "name": "Homer Tunnel (East Portal)",
+      "latitude": -44.7667,
+      "longitude": 167.9833
+    },
+    {
+      "day": 14,
+      "date": "Sat 14 Nov",
+      "activity_type": "Sightseeing",
+      "name": "Milford Sound / Piopiotahi",
+      "latitude": -44.672,
+      "longitude": 167.927
+    },
+    {
+      "day": 14,
+      "date": "Sat 14 Nov",
+      "activity_type": "Stay",
+      "name": "Milford Sound Lodge",
+      "latitude": -44.65,
+      "longitude": 167.95
+    },
+    {
+      "day": 15,
+      "date": "Sun 15 Nov",
+      "activity_type": "Cruise",
+      "name": "Milford Sound Nature Cruise Terminal",
+      "latitude": -44.672,
+      "longitude": 167.927
+    },
+    {
+      "day": 15,
+      "date": "Sun 15 Nov",
+      "activity_type": "Kayak",
+      "name": "Fiordland Expeditions – Pearl Harbour, Manapouri",
+      "latitude": -45.5667,
+      "longitude": 167.6167
+    },
+    {
+      "day": 15,
+      "date": "Sun 15 Nov",
+      "activity_type": "Stay",
+      "name": "Manapouri Motels & Holiday Park",
+      "latitude": -45.5667,
+      "longitude": 167.6167
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Viewpoint",
+      "name": "Lindis Pass Summit Lookout",
+      "latitude": -44.5833,
+      "longitude": 169.6333
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Walk (Optional)",
+      "name": "Clay Cliffs, Omarama",
+      "latitude": -44.5167,
+      "longitude": 169.9333
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Food",
+      "name": "The Better Batter NZ, Twizel",
+      "latitude": -44.258,
+      "longitude": 170.101
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Food",
+      "name": "Fairlie Bakehouse",
+      "latitude": -44.101,
+      "longitude": 170.829
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Viewpoint",
+      "name": "Burkes Pass Lookout",
+      "latitude": -44.0833,
+      "longitude": 170.6333
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Sightseeing",
+      "name": "Church of the Good Shepherd, Lake Tekapo",
+      "latitude": -44.004,
+      "longitude": 170.476
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Food",
+      "name": "Astro Café, Mt John Observatory",
+      "latitude": -43.987,
+      "longitude": 170.464
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Experience",
+      "name": "Aoraki Mackenzie International Dark Sky Reserve",
+      "latitude": -44.004,
+      "longitude": 170.476
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Stay (Option A)",
+      "name": "Lake Tekapo TOP 10",
+      "latitude": -44.004,
+      "longitude": 170.476
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Stay (Option B)",
+      "name": "Lake McGregor Camping Area",
+      "latitude": -43.9,
+      "longitude": 170.45
+    },
+    {
+      "day": 16,
+      "date": "Mon 16 Nov",
+      "activity_type": "Stay (Option C)",
+      "name": "Lake Alexandrina",
+      "latitude": -43.9333,
+      "longitude": 170.45
+    },
+    {
+      "day": 17,
+      "date": "Tue 17 Nov",
+      "activity_type": "Viewpoint",
+      "name": "Lake Pukaki Lookout (Peters Lookout)",
+      "latitude": -44.1833,
+      "longitude": 170.15
+    },
+    {
+      "day": 17,
+      "date": "Tue 17 Nov",
+      "activity_type": "Food",
+      "name": "Mt Cook Alpine Salmon Shop",
+      "latitude": -44.083,
+      "longitude": 170.133
+    },
+    {
+      "day": 17,
+      "date": "Tue 17 Nov",
+      "activity_type": "Walk",
+      "name": "Kea Point Track",
+      "latitude": -43.7167,
+      "longitude": 170.0833
+    },
+    {
+      "day": 17,
+      "date": "Tue 17 Nov",
+      "activity_type": "Walk",
+      "name": "Hooker Valley Track",
+      "latitude": -43.7167,
+      "longitude": 170.0833
+    },
+    {
+      "day": 17,
+      "date": "Tue 17 Nov",
+      "activity_type": "Wildlife (Optional)",
+      "name": "Oamaru Blue Penguin Colony",
+      "latitude": -45.1083,
+      "longitude": 170.975
+    },
+    {
+      "day": 17,
+      "date": "Tue 17 Nov",
+      "activity_type": "Stay (Option A)",
+      "name": "White Horse Hill Campground (DOC)",
+      "latitude": -43.7333,
+      "longitude": 170.0833
+    },
+    {
+      "day": 17,
+      "date": "Tue 17 Nov",
+      "activity_type": "Stay (Option B)",
+      "name": "Glentanner Park Centre",
+      "latitude": -43.8833,
+      "longitude": 170.1333
+    },
+    {
+      "day": 18,
+      "date": "Wed 18 Nov",
+      "activity_type": "Food (Optional)",
+      "name": "Geraldine",
+      "latitude": -44.0833,
+      "longitude": 171.2333
+    },
+    {
+      "day": 18,
+      "date": "Wed 18 Nov",
+      "activity_type": "Food",
+      "name": "Addington Coffee Co-op, Christchurch",
+      "latitude": -43.5444,
+      "longitude": 172.6125
+    },
+    {
+      "day": 18,
+      "date": "Wed 18 Nov",
+      "activity_type": "Campervan Return",
+      "name": "Elements RV World",
+      "latitude": -43.545,
+      "longitude": 172.526
+    },
+    {
+      "day": 18,
+      "date": "Wed 18 Nov",
+      "activity_type": "Airport",
+      "name": "Christchurch International Airport",
+      "latitude": -43.4894,
+      "longitude": 172.532
+    },
+    {
+      "day": 19,
+      "date": "Thu 19 Nov",
+      "activity_type": "Flight Departure",
+      "name": "Christchurch International Airport",
+      "latitude": -43.4894,
+      "longitude": 172.532
+    }
+  ]
+}
